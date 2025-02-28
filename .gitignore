@@ -1,0 +1,6 @@
+venv/
+Images/
+*.h5  # Optionally exclude .h5 files if you’ll handle them with Git LFS
+__pycache__/
+*.pyc
+*.pyd  # Exclude Python compiled files

@@ -1,121 +1,94 @@
+# ✍️ Handwritten Character Recognition Model
 
+This project implements a **Convolutional Neural Network (CNN)** to recognize **handwritten characters**: digits (0–9), uppercase (A–Z), and lowercase letters (a–z). It includes a **Streamlit web app** for real-time predictions using uploaded image files.
 
-# CodeAlpha Handwritten Recognition
+This project was developed during my internship with **CodeAlpha**.
 
-## Overview
-This project implements a Convolutional Neural Network (CNN) for handwritten character recognition, capable of recognizing digits (0-9), uppercase letters (A-Z), and lowercase letters (a-z). The model is trained on a dataset of grayscale images (28x28 pixels) and deployed as a web application using Streamlit, allowing users to upload handwritten images for real-time prediction.
+---
 
-The project was developed as part of the CodeAlpha internship and leverages TensorFlow/Keras for model training and Streamlit for the user interface. The repository includes the training script, model files, and a Streamlit app, with the dataset and large image files hosted externally for size management.
+## 📊 Dataset
 
-## Features
-- Recognizes handwritten characters: digits (0-9), uppercase letters (A-Z), and lowercase letters (a-z) (62 classes total).
-- Trained on a custom dataset of 37,995 grayscale images (28x28 pixels).
-- Web-based interface using Streamlit for easy image uploads and predictions.
-- Model trained with CNN architecture, achieving high accuracy on test data.
-- Lightweight repository excluding large files, with instructions for accessing external data.
+- **Size**: 37,995 grayscale images  
+- **Image Dimensions**: 28x28 pixels  
+- **Classes**: 62 (0–9, A–Z, a–z)  
+- **Metadata**: `english.csv` maps image filenames to labels
 
-## Prerequisites
-Before running this project, ensure you have the following installed:
-- Python 3.8 or higher
-- Git (for cloning the repository)
-- The following Python packages (install via `pip`):
-  - `tensorflow`
-  - `streamlit`
-  - `pillow`
-  - `numpy`
-  - `pandas`
-  - `scikit-learn`
+---
 
-You can install the required packages using the provided `requirements.txt`:
+## 🧠 Model
+
+- **Architecture**: Convolutional Neural Network (CNN)  
+- **Libraries**: TensorFlow, Keras  
+- **Accuracy**: High performance on test data (details in training logs)
+
+---
+
+## 🛠️ Features
+
+- Trains a CNN for 62-class classification  
+- Preprocessing with grayscale normalization  
+- Real-time predictions via a Streamlit web app  
+- Confidence score displayed for each prediction  
+- Clean UI for image uploads and results
+
+---
+
+## 🔧 Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/dkumi12/CodeAlpha_HandwrittenRecognitionModel.git
+cd CodeAlpha_HandwrittenRecognitionModel
+```
+
+### 2. Install Requirements
+
 ```bash
 pip install -r requirements.txt
 ```
 
-## Installation
-### Clone the Repository
-Clone this repository to your local machine:
-```bash
-git clone https://github.com/dkumi12/CodeAlpha_HandwrittenRecognition.git
-cd CodeAlpha_HandwrittenRecognition
-```
+### 3. Download Dataset
 
-### Install Dependencies
-Install the required Python packages:
-```bash
-pip install -r requirements.txt
-```
+Download from [Google Drive](https://drive.google.com/drive/folders/1IeUA5T60VL9dx7b1QQCNKGGt3uFA1Ej9?usp=drive_link) and extract into the root folder as `Images/`.
 
-### Download the Dataset
-The training dataset (images stored in the `Images` folder) is not included in this repository due to its large size (~578 MB). Download the dataset from [(https://drive.google.com/drive/folders/1IeUA5T60VL9dx7b1QQCNKGGt3uFA1Ej9?usp=drive_link)] and place it in the project root as `Images/`. The dataset metadata is provided in `english.csv`, which maps image filenames to their corresponding labels (0-9, A-Z, a-z).
+---
 
-### Optional: Git LFS for Model File
-If the `handwritten_character_recognition_model.h5` file is large, it may be tracked with Git LFS. Install Git LFS and pull large files:
-```bash
-git lfs install
-git lfs pull
-```
+## ▶️ Usage
 
-## Usage
-### Training the Model
-To train the model from scratch, run the training script:
+### 🔁 Train the Model
+
 ```bash
 python train.py
 ```
-- Ensure the `Images` folder and `english.csv` are in the project root.
-- The script will load and preprocess the images, train the CNN, and save the model as `handwritten_character_recognition_model.h5` and the label encoder as `label_binarizer.pkl`.
 
-### Running the Streamlit App
-To use the pre-trained model for predictions, run the Streamlit application:
+### 🌐 Run the Web App
+
 ```bash
 streamlit run app.py
 ```
-- Open your browser to `http://localhost:8501`.
-- Upload a 28x28 grayscale image of a handwritten character (PNG, JPG, or JPEG) to get a prediction.
 
-### Example Input
-- Upload an image like `img001-001.png` (a handwritten “0”) or a custom handwritten character image.
-- The app will display the predicted character and confidence score.
-
-## Project Structure
-```
-CodeAlpha_HandwrittenRecognition/
-├── .gitignore                  # Excludes large files like Images/ and venv/
-├── requirements.txt            # Python dependencies
-├── english.csv                 # Dataset metadata (image filenames and labels)
-├── app.py                      # Streamlit web application
-├── train.py                    # Training script for the CNN model
-├── handwritten_character_recognition_model.h5  # Pre-trained model (if using Git LFS)
-├── label_binarizer.pkl         # Label encoder for character classes
-├── Figure_1.png                # Optional visualization from training
-└── README.md                   # This file
-```
-
-## Model Architecture
-The CNN model consists of:
-- Two convolutional layers (32 and 64 filters, 3x3 kernels, ReLU activation).
-- Two max pooling layers (2x2 pool size).
-- A flatten layer, followed by a dense layer (128 units, ReLU activation) with dropout (0.5).
-- An output dense layer with softmax activation for 62 classes (0-9, A-Z, a-z).
-
-The model is compiled with the Adam optimizer and categorical cross-entropy loss, trained for 10 epochs with a batch size of 128.
-
-## Dataset
-The dataset consists of 37,995 grayscale images (28x28 pixels), each representing a handwritten character (0-9, A-Z, a-z). The metadata is stored in `english.csv`, with columns `image` (filename) and `label` (character). The images are stored in the `Images` folder, available externally due to size constraints.
-
-## Contributing
-Contributions are welcome! Please fork the repository, create a feature branch, and submit a pull request with your changes. Ensure you follow the project structure and include tests or documentation as needed.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details (if you choose to add one). If no license is specified, consider adding one to define usage terms.
-
-## Acknowledgments
-- CodeAlpha for the internship opportunity.
-- TensorFlow/Keras for the machine learning framework.
-- Streamlit for the web application framework.
-- The open-source community for tools like Git, Git LFS, and Python libraries.
-
-## Contact
-For questions or feedback, contact 12dkumi@gmail.com or open an issue on this GitHub repository.
+Open your browser at `http://localhost:8501` and upload an image to get a prediction!
 
 ---
+
+## 📁 Project Structure
+
+```
+CodeAlpha_HandwrittenRecognitionModel/
+├── app.py                    # Streamlit app
+├── train.py                  # Model training
+├── requirements.txt
+├── english.csv               # Label metadata
+├── model/                    # Trained model and label binarizer
+└── Images/                   # Training data (external)
+```
+
+---
+
+## 📫 Contact
+
+**Name**: David Osei Kumi  
+**Email**: [12dkumi@gmail.com](mailto:12dkumi@gmail.com)  
+**GitHub**: [@dkumi12](https://github.com/dkumi12)
 

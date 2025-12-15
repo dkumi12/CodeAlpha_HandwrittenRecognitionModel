@@ -2,47 +2,79 @@ import streamlit as st
 import requests
 from PIL import Image
 import io
+import numpy as np
+from streamlit_drawable_canvas import st_canvas
 
 # --- CONFIGURATION ---
-# If running locally, put your EC2 Public IP here (e.g., "http://54.123.45.67:8000")
-# If running on the same server, use "http://localhost:8000"
-API_URL = "http://localhost:8000/predict" 
+# localhost works because Streamlit and FastAPI run in the same container
+API_URL = "http://localhost:8000/predict"
 
-st.set_page_config(page_title="Handwritten Recognition", layout="centered")
+st.set_page_config(page_title="Handwritten Character AI", layout="centered")
 
 st.title("✍️ Handwritten Character AI")
-st.write("Upload an image of a handwritten digit or character to identify it!")
+st.write("Draw a character or upload an image to identify it!")
 
-# File Uploader
-uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
+# Create Tabs
+tab1, tab2 = st.tabs(["🖌️ Draw Here", "📂 Upload File"])
+image_to_send = None
 
-if uploaded_file is not None:
-    # 1. Display the image
-    image = Image.open(uploaded_file)
-    st.image(image, caption='Your Upload', width=300)
+# --- TAB 1: DRAWING CANVAS ---
+with tab1:
+    st.write("Draw a digit or letter below:")
     
-    # 2. Convert to bytes for API
-    buf = io.BytesIO()
-    image.save(buf, format="PNG")
-    byte_im = buf.getvalue()
+    # Create the drawing pad
+    canvas_result = st_canvas(
+        fill_color="rgba(255, 165, 0, 0.3)",  # Transparent fill
+        stroke_width=15,                      # Thick brush for better recognition
+        stroke_color="#000000",               # Black ink
+        background_color="#FFFFFF",           # White paper
+        height=280,
+        width=280,
+        drawing_mode="freedraw",
+        key="canvas",
+    )
 
-    # 3. Predict Button
-    if st.button("🔍 Identify Character"):
+    if canvas_result.image_data is not None:
+        # Convert the canvas data (numpy array) to a PIL Image
+        img_array = canvas_result.image_data.astype('uint8')
+        image_to_send = Image.fromarray(img_array)
+
+# --- TAB 2: FILE UPLOADER ---
+with tab2:
+    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
+    if uploaded_file is not None:
+        image_to_send = Image.open(uploaded_file)
+        st.image(image_to_send, caption='Your Upload', width=200)
+
+# --- PREDICTION BUTTON ---
+if st.button("🔍 Identify Character"):
+    if image_to_send is None:
+        st.warning("⚠️ Please draw something or upload an image first.")
+    else:
         with st.spinner("Analyzing..."):
             try:
-                # Send request to your FastAPI backend
+                # 1. Convert Image to RGB (removes alpha channel from canvas)
+                if image_to_send.mode != "RGB":
+                    image_to_send = image_to_send.convert("RGB")
+                
+                # 2. Convert to Bytes
+                buf = io.BytesIO()
+                image_to_send.save(buf, format="PNG")
+                byte_im = buf.getvalue()
+
+                # 3. Send to API
                 files = {"file": ("image.png", byte_im, "image/png")}
                 response = requests.post(API_URL, files=files)
                 
+                # 4. Show Result
                 if response.status_code == 200:
                     result = response.json()
-                    
-                    # Display Results nicely
                     st.success(f"**Prediction:** {result['prediction']}")
                     st.info(f"**Confidence:** {result['confidence']:.2%}")
-                    
                 else:
                     st.error(f"Error {response.status_code}: {response.text}")
             
             except requests.exceptions.ConnectionError:
-                st.error("❌ Could not connect to the API. Is the Docker container running?")
+                st.error("❌ Could not connect to the API. Is it running?")
+            except Exception as e:
+                st.error(f"❌ Error: {e}")

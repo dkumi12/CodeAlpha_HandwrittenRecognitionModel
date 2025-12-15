@@ -6,7 +6,6 @@ import numpy as np
 from streamlit_drawable_canvas import st_canvas
 
 # --- CONFIGURATION ---
-# localhost works because Streamlit and FastAPI run in the same container
 API_URL = "http://localhost:8000/predict"
 
 st.set_page_config(page_title="Handwritten Character AI", layout="centered")
@@ -25,7 +24,7 @@ with tab1:
     # Create the drawing pad
     canvas_result = st_canvas(
         fill_color="rgba(255, 165, 0, 0.3)",  # Transparent fill
-        stroke_width=15,                      # Thick brush for better recognition
+        stroke_width=15,                      # Thick brush
         stroke_color="#000000",               # Black ink
         background_color="#FFFFFF",           # White paper
         height=280,
@@ -35,7 +34,7 @@ with tab1:
     )
 
     if canvas_result.image_data is not None:
-        # Convert the canvas data (numpy array) to a PIL Image
+        # Convert canvas data to image
         img_array = canvas_result.image_data.astype('uint8')
         image_to_send = Image.fromarray(img_array)
 
@@ -53,20 +52,20 @@ if st.button("🔍 Identify Character"):
     else:
         with st.spinner("Analyzing..."):
             try:
-                # 1. Convert Image to RGB (removes alpha channel from canvas)
+                # Convert to RGB (standardize input)
                 if image_to_send.mode != "RGB":
                     image_to_send = image_to_send.convert("RGB")
                 
-                # 2. Convert to Bytes
+                # Convert to Bytes
                 buf = io.BytesIO()
                 image_to_send.save(buf, format="PNG")
                 byte_im = buf.getvalue()
 
-                # 3. Send to API
+                # Send to API
                 files = {"file": ("image.png", byte_im, "image/png")}
                 response = requests.post(API_URL, files=files)
                 
-                # 4. Show Result
+                # Show Result
                 if response.status_code == 200:
                     result = response.json()
                     st.success(f"**Prediction:** {result['prediction']}")
@@ -74,7 +73,5 @@ if st.button("🔍 Identify Character"):
                 else:
                     st.error(f"Error {response.status_code}: {response.text}")
             
-            except requests.exceptions.ConnectionError:
-                st.error("❌ Could not connect to the API. Is it running?")
             except Exception as e:
                 st.error(f"❌ Error: {e}")

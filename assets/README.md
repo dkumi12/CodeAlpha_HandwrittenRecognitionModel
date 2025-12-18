@@ -7,9 +7,9 @@ This folder contains images and visual resources for the README.
 | File | Description | Status |
 |------|-------------|--------|
 | `demo.gif` | Demo of the Gradio interface in action | ⏳ To be added |
-| `confusion_matrix.png` | Confusion matrix from model evaluation | ⏳ To be added |
-| `training_curves.png` | Training/validation accuracy and loss curves | ⏳ To be added |
-| `architecture.png` | Model architecture visualization | ⏳ To be added |
+| `confusion_matrix.png` | Confusion matrix from model evaluation | ✅ Added |
+| `training_curves.png` | Training/validation accuracy and loss curves | ✅ Added |
+| `architecture.png` | Model architecture visualization | ✅ Added |
 
 ## 🎨 How to Generate These Assets
 

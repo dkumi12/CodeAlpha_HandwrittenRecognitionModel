@@ -128,9 +128,6 @@ The model shows expected confusion between visually similar characters:
 
 ### 📈 Training Visualizations
 
-> **Note:** Visualizations will be added soon. See `assets/README.md` for instructions on generating them.
-
-<!-- Uncomment when images are ready:
 #### Training Curves
 ![Training Curves](assets/training_curves.png)
 
@@ -139,7 +136,6 @@ The model shows expected confusion between visually similar characters:
 
 #### Model Architecture
 ![Architecture](assets/architecture.png)
--->
 
 ---
 

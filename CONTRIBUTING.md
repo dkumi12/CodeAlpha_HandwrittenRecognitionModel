@@ -107,7 +107,7 @@ We follow conventional commits:
 ## 📞 Questions?
 
 Feel free to open an issue for any questions or reach out via:
-- LinkedIn: [Daniel Kumi](https://www.linkedin.com/in/daniel-kumi-9b5834205/)
+- LinkedIn: [David Osei Kumi](https://www.linkedin.com/in/daniel-kumi-9b5834205/)
 - GitHub: [@dkumi12](https://github.com/dkumi12)
 
 ## 📄 License

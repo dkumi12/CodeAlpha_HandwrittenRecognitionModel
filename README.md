@@ -238,7 +238,7 @@ curl -X POST "http://localhost:8000/predict" \
 
 ## 👤 Author
 
-**Daniel Kumi**  
+**David Osei Kumi**  
 ML Engineer | AWS Certified AI Practitioner
 
 - 🔗 [LinkedIn](https://www.linkedin.com/in/daniel-kumi-9b5834205/)

@@ -285,7 +285,7 @@ def main() -> None:
     # ==========================================
     st.divider()
     st.caption(
-        "Built with ❤️ by Daniel Kumi | "
+        "Built with ❤️ by David Osei Kumi | "
         "[GitHub](https://github.com/dkumi12) | "
         "[LinkedIn](https://www.linkedin.com/in/daniel-kumi-9b5834205/)"
     )

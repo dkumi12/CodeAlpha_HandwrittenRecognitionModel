@@ -6,9 +6,7 @@ This folder contains the model training notebooks and resources.
 
 | File | Description |
 |------|-------------|
-| `train_mobilenet.ipynb` | Main training notebook with MobileNetV2 transfer learning |
-| `model_evaluation.ipynb` | Confusion matrix analysis and metrics visualization |
-| `data_exploration.ipynb` | Dataset analysis and preprocessing exploration |
+| `train_mobilenet.ipynb` | ✅ Main training notebook with MobileNetV2 transfer learning |
 
 ## 🏋️ Training Summary
 

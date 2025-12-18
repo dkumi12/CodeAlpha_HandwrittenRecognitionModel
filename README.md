@@ -15,6 +15,7 @@ app_port: 7860
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00?logo=tensorflow&logoColor=white)](https://tensorflow.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://docker.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A deep learning system for recognizing handwritten characters (A-Z, a-z, 0-9) using **MobileNetV2 transfer learning**, achieving **94.28% top-3 accuracy** across 62 character classes.
 
@@ -30,6 +31,16 @@ A deep learning system for recognizing handwritten characters (A-Z, a-z, 0-9) us
 | Dataset Size | 3,410 images |
 
 > The 94%+ top-3 accuracy means the correct character is almost always in the model's top 3 predictions.
+
+---
+
+## 🎥 Demo
+
+> **Note:** Demo GIF will be added soon. In the meantime, try the [live app](https://huggingface.co/spaces/YOUR_SPACE_URL)!
+
+<!-- Uncomment when demo.gif is ready:
+![Demo](assets/demo.gif)
+-->
 
 ---
 
@@ -114,6 +125,21 @@ The model shows expected confusion between visually similar characters:
 | 1 (one) | l (lowercase L) | 27.3% | Vertical line similarity |
 
 > These are the same character pairs that humans often struggle to distinguish in handwriting!
+
+### 📈 Training Visualizations
+
+> **Note:** Visualizations will be added soon. See `assets/README.md` for instructions on generating them.
+
+<!-- Uncomment when images are ready:
+#### Training Curves
+![Training Curves](assets/training_curves.png)
+
+#### Confusion Matrix
+![Confusion Matrix](assets/confusion_matrix.png)
+
+#### Model Architecture
+![Architecture](assets/architecture.png)
+-->
 
 ---
 

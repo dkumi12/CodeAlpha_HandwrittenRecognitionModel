@@ -36,7 +36,7 @@ A deep learning system for recognizing handwritten characters (A-Z, a-z, 0-9) us
 
 ## 🎥 Demo
 
-> **Note:** Demo GIF will be added soon. In the meantime, try the [live app](https://huggingface.co/spaces/YOUR_SPACE_URL)!
+> **Note:** Demo GIF will be added soon. In the meantime, try the [live app](https://huggingface.co/spaces/dkumi12/handwritten-cnn)!
 
 <!-- Uncomment when demo.gif is ready:
 ![Demo](assets/demo.gif)
